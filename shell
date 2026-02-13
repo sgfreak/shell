@@ -1,0 +1,9 @@
+#!/bin/sh
+while printf '%s $ ' "$PWD" && read -r c; do
+    [ -z "$c" ] && continue
+    case "$c" in
+        cd*) cd "${c#cd }" 2>/dev/null || cd "$HOME" ;;
+        exit) exit ;;
+        *) eval "$c" ;;
+    esac
+done
